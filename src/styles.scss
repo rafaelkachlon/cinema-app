@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #020d18;
+}
+
+.toolbar {
+  background-color: #0f2133;
+  height: 70px;
+  border: none;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .title {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+}
+
+.page-content {
+  padding-top: 70px;
+  border: 1px solid;
+
+}

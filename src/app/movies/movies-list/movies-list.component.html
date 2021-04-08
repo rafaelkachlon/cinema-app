@@ -1,0 +1,15 @@
+<div class="movies-container">
+  <app-movie-item
+    *ngFor="let movie of movies$ | async"
+    [movie]="movie"
+    (openModal)="onOpenModal($event)"></app-movie-item>
+</div>
+
+<div class="add-movie" role="button">
+  <i class="pi pi-plus"></i>
+</div>
+
+<p-dialog [(visible)]="showDialog" [modal]="true" [dismissableMask]="true"
+          [baseZIndex]="10000">
+  <app-movie-overview-modal [selectedMovie]="selectedMovie"></app-movie-overview-modal>
+</p-dialog>

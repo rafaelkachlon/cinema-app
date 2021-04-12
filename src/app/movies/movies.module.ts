@@ -6,7 +6,10 @@ import {MovieItemComponent} from './movie-item/movie-item.component';
 import {UppercaseWordsPipe} from '../pipes/uppercaseWords.pipe';
 import {EnglishOnlyPipe} from '../pipes/englishonly.pipe';
 import {DialogModule} from 'primeng/dialog';
-import { MovieOverviewModalComponent } from './movie-overview-modal/movie-overview-modal.component';
+import {MovieOverviewModalComponent} from './movie-overview-modal/movie-overview-modal.component';
+import {MovieAddUpdateModalComponent} from './movie-add-update-modal/movie-add-update-modal.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
@@ -15,7 +18,8 @@ import { MovieOverviewModalComponent } from './movie-overview-modal/movie-overvi
     MovieItemComponent,
     UppercaseWordsPipe,
     EnglishOnlyPipe,
-    MovieOverviewModalComponent
+    MovieOverviewModalComponent,
+    MovieAddUpdateModalComponent
   ],
   exports: [
     MoviesListComponent
@@ -23,7 +27,9 @@ import { MovieOverviewModalComponent } from './movie-overview-modal/movie-overvi
   imports: [
     CommonModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    ReactiveFormsModule,
+    CalendarModule
   ]
 })
 export class MoviesModule {

@@ -1,7 +1,10 @@
 <p-toolbar styleClass="toolbar">
   <span class="title">Cinema Application</span>
+  <div class="add-movie" role="button" (click)="openModal()">
+    Add New
+  </div>
 </p-toolbar>
-<div class="page-content">
 
-  <app-movies-list></app-movies-list>
+<div class="page-content">
+  <app-movies-list #movielist></app-movies-list>
 </div>

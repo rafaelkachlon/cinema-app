@@ -1,0 +1,45 @@
+:host ::ng-deep .p-toolbar.toolbar {
+  background-color: #0f2133;
+  height: 70px;
+  border: none;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .title {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .add-movie {
+    color: white;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: #0f2133;
+      background: white;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .add-movie {
+      font-size: 12px;
+      padding: 5px
+    }
+    .title {
+      font-size: 14px;
+    }
+  }
+}
+
+.page-content {
+  padding-top: 70px;
+  border: 1px solid;
+}
+

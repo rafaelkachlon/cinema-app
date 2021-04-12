@@ -9,14 +9,18 @@ import {catchError, map} from 'rxjs/operators';
 })
 export class MoviesService {
   private readonly key = '9ee82a95315c563b8d277066f4ee9201';
-  private readonly url = 'https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=vote_count.desc&include_adult=true&include_video=false&page=1&api_key=';
+  private readonly baseUrl = 'https://api.themoviedb.org/3/';
+  private readonly discoverUrl = 'discover/movie?language=en-US&sort_by=vote_count.desc&include_adult=true&include_video=false&page=1&api_key=';
+  // private readonly movieDetailsUrl = 'movie/';
   private readonly imageUrl = 'https://image.tmdb.org/t/p/w185/';
+
+  // {movie_id}?api_key=<<api_key>>&language=en-US';
 
   constructor(private http: HttpClient) {
   }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get(`${this.url}${this.key}`)
+    return this.http.get(`${this.baseUrl}${this.discoverUrl}${this.key}`)
       .pipe(
         map((response: MoviesResponse) => response.results),
         map((movies: MovieResponse[]) => {

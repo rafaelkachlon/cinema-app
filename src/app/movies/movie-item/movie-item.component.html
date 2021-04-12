@@ -4,11 +4,11 @@
       <img [src]="movie.poster_path" [alt]="movie.title + 'poster'">
     </div>
     <div class="info">
-      <div class="title">{{movie.title | uppercaseword | englishonly}}</div>
+      <div class="title">{{movie.title | uppercaseword | englishonly}} </div>
       <div class="rating">
         <i class="pi pi-star"></i>
         <span class="number">{{movie.vote_average}}</span>
-        <span>/10</span>
+        <span>/10 {{changeDetected}}</span>
       </div>
     </div>
     <div class="read-more-btn" (click)="readMore()">

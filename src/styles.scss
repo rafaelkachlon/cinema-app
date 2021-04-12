@@ -10,25 +10,4 @@ body {
   background-color: #020d18;
 }
 
-.toolbar {
-  background-color: #0f2133;
-  height: 70px;
-  border: none;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
 
-  .title {
-    font-size: 20px;
-    color: white;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-}
-
-.page-content {
-  padding-top: 70px;
-  border: 1px solid;
-
-}

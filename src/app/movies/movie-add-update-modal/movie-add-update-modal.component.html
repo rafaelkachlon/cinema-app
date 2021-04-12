@@ -1,0 +1,24 @@
+<h2>Add new movie</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label for="title">Title</label>
+  <input type="text" id="title" #title
+         placeholder="Enter movie title..."
+         formControlName="title">
+  <div class="error" *ngIf="required('title')">Title is required.</div>
+  <label for="description">Description</label>
+  <input type="text" id="description"
+         placeholder="Enter movie description..."
+         formControlName="description">
+  <div class="error" *ngIf="required('description')">Description is required.</div>
+
+  <label for="publishDate">Publish date</label>
+
+  <p-calendar inputId="publishDate" formControlName="publishDate"
+              [yearNavigator]="true" [monthNavigator]="true"
+              [readonlyInput]="true" yearRange="1900:2021">
+  </p-calendar>
+  <div class="error" *ngIf="required('publishDate')">Publish date is required.</div>
+  <div class="error" *ngIf="invalid">Publish date is invalid.</div>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

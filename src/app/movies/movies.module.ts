@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ReactiveFormsModule,
     CalendarModule,
     DynamicDialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ButtonModule
   ]
 })
 export class MoviesModule {

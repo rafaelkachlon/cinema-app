@@ -48,7 +48,24 @@
       }
     }
 
+    .buttons {
+      display: flex;
+      justify-content: center;
 
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+
+        &.update {
+          background: blue;
+        }
+
+        &.remove {
+          background: red;
+        }
+      }
+    }
   }
 }
 

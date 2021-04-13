@@ -1,16 +1,25 @@
 <div class="modal-content">
   <div class="image-container">
     <img [src]="selectedMovie?.poster_path" [alt]="selectedMovie?.title + 'poster'">
+    <div class="buttons">
+      <button pButton type="button"
+              label="Edit" class="p-button-primary"
+              (click)="editMovie()"></button>
+      <button pButton type="button"
+              label="Remove" class="p-button-danger"
+              (click)="removeMovie()"></button>
+
+    </div>
   </div>
+
   <div class="text-container">
     <div class="movie-title">{{selectedMovie?.title | uppercaseword | englishonly}}</div>
     <div class="movie-overview">
       {{selectedMovie?.overview}}
     </div>
     <div class="release-date">Release date: {{selectedMovie?.release_date | date:'dd/MM/YYYY'}}</div>
+
   </div>
-  <button (click)="editMovie()">Edit</button>
-  <button (click)="removeMovie()">Remove</button>
 </div>
 
 <p-confirmDialog icon="pi pi-exclamation-triangle"

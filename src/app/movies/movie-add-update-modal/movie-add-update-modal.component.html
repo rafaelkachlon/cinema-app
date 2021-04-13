@@ -1,15 +1,15 @@
 <h2>{{title}}</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
   <label for="title">Title</label>
-  <input type="text" id="title"
+  <input type="text" id="title" class="p-inputtext p-component"
          placeholder="Enter movie title..."
          formControlName="title">
   <div class="error" *ngIf="required('title')">Title is required.</div>
   <div class="error" *ngIf="titleExists">Title is already exists.</div>
   <label for="description">Overview</label>
-  <input type="text" id="description"
-         placeholder="Enter movie overview..."
-         formControlName="overview">
+  <textarea id="description" rows="5" class="p-inputtextarea p-inputtext p-component"
+            placeholder="Enter movie overview..."
+            formControlName="overview"></textarea>
   <div class="error" *ngIf="required('overview')">Overview is required.</div>
 
   <label for="publishDate">Release date</label>
@@ -21,5 +21,5 @@
   <div class="error" *ngIf="required('release_date')">Publish date is required.</div>
   <div class="error" *ngIf="invalid">Release date is invalid.</div>
 
-  <button type="submit" [disabled]="form.invalid">Submit</button>
+  <button class="submit-btn" pButton label="Save" type="submit" [disabled]="form.invalid"></button>
 </form>

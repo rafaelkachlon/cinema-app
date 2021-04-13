@@ -2,3 +2,19 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+::ng-deep .p-calendar {
+  width: 100%;
+}
+
+.submit-btn {
+  margin-top: 20px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.error {
+  color: #ff4d4d;
+}

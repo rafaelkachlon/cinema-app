@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   openModal(): void {
-    this.movies.onOpenModal(null);
+    this.movies.onAdd(null);
   }
 }
 

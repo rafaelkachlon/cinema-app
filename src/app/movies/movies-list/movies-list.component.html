@@ -7,14 +7,3 @@
 <ng-template #noMovies>
   <div class="no-movies">Failed to get movies or there aren't any movies yet.</div>
 </ng-template>
-
-
-<p-dialog *ngIf="showDialog" [(visible)]="showDialog" [modal]="true" [dismissableMask]="true"
-          [baseZIndex]="10000" [contentStyle]="{'overflow': 'visible'}">
-  <app-movie-overview-modal *ngIf="selectedMovie; else addUpdateMovie"
-                            [selectedMovie]="selectedMovie">
-  </app-movie-overview-modal>
-  <ng-template #addUpdateMovie>
-    <app-movie-add-update-modal (submitted)="onAddUpdateSubmitted($event)"></app-movie-add-update-modal>
-  </ng-template>
-</p-dialog>

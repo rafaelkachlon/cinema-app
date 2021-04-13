@@ -10,6 +10,7 @@ import {MovieOverviewModalComponent} from './movie-overview-modal/movie-overview
 import {MovieAddUpdateModalComponent} from './movie-add-update-modal/movie-add-update-modal.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {CalendarModule} from 'primeng/calendar';
     HttpClientModule,
     DialogModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    DynamicDialogModule
   ]
 })
 export class MoviesModule {

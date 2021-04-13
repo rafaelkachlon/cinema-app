@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {Movie} from '../models/movie.model';
 
 @Component({
   selector: 'app-movie-add-update-modal',
@@ -9,13 +11,17 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 })
 export class MovieAddUpdateModalComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  movie: Movie;
+
+  constructor(private fb: FormBuilder,
+              private config: DynamicDialogConfig) {
   }
 
   @Output() submitted = new EventEmitter();
   form: FormGroup;
 
   ngOnInit(): void {
+    this.movie = this.config.data.movie;
     this.form = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],

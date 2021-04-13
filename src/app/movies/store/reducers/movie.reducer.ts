@@ -15,11 +15,8 @@ export const initialState: MovieState = {
 };
 
 export function movieReducer(state = initialState, action: movieActions.MoviesAction): MovieState {
-  console.log('ststatattt', state);
-  console.log('type', action.type);
   switch (action.type) {
     case movieActions.LOAD_MOVIES: {
-
       return {...state, loading: true};
     }
 
@@ -29,6 +26,10 @@ export function movieReducer(state = initialState, action: movieActions.MoviesAc
     }
     case movieActions.LOAD_MOVIES_FAIL: {
       return {...state, loading: false, loaded: false, error: true};
+    }
+    case movieActions.CREATE_MOVIE_SUCCESS: {
+      const movies = [...state.movies, action.payload];
+      return {...state, movies};
     }
   }
   return state;

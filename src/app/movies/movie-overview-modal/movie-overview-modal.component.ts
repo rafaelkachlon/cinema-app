@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Movie} from '../models/movie.model';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-movie-overview-modal',
@@ -8,13 +9,12 @@ import {Movie} from '../models/movie.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieOverviewModalComponent implements OnInit {
-
-  @Input()
   selectedMovie: Movie;
 
-  constructor() {
+  constructor(private config: DynamicDialogConfig) {
   }
 
   ngOnInit(): void {
+    this.selectedMovie = this.config.data;
   }
 }

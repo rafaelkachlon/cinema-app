@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Movie, MovieResponse, MoviesResponse} from './models/movie.model';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, delay, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +32,16 @@ export class MoviesService {
               poster_path: `${this.imageUrl}${movie.poster_path}`,
               release_date: new Date(movie.release_date),
               vote_average: movie.vote_average
-            };
+            } as Movie;
           });
         }),
         catchError(error => of(error.json()))
       );
+  }
+
+  createMovie(movie: Movie): Observable<Movie> {
+    return of(movie).pipe(
+      delay(500)
+    );
   }
 }

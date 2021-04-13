@@ -11,7 +11,7 @@ import {MovieAddUpdateModalComponent} from './movie-add-update-modal/movie-add-u
 import {ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
     DialogModule,
     ReactiveFormsModule,
     CalendarModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    ConfirmDialogModule
   ]
 })
 export class MoviesModule {

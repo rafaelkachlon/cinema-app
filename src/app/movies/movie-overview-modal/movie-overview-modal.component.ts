@@ -2,18 +2,21 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Movie} from '../models/movie.model';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-movie-overview-modal',
   templateUrl: './movie-overview-modal.component.html',
   styleUrls: ['./movie-overview-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ConfirmationService]
 })
 export class MovieOverviewModalComponent implements OnInit {
   selectedMovie: Movie;
 
   constructor(private ref: DynamicDialogRef,
-              private config: DynamicDialogConfig) {
+              private config: DynamicDialogConfig,
+              private confirmation: ConfirmationService) {
   }
 
   ngOnInit(): void {
@@ -25,6 +28,12 @@ export class MovieOverviewModalComponent implements OnInit {
   }
 
   removeMovie(): void {
-    this.ref.close();
+    this.confirmation.confirm({
+      message: `Are you sure that you want to remove "${this.selectedMovie.title}"?`,
+      accept: () => {
+        // dispatch a remove action
+        this.ref.close();
+      }
+    });
   }
 }

@@ -5,7 +5,7 @@ import {Movie} from '../models/movie.model';
 import {Store} from '@ngrx/store';
 import {MovieState} from '../store/reducers/movie.reducer';
 import * as fromSelectors from '../store/selectors/movie.selector';
-import {CreateMovie, LoadMovies} from '../store/actions/movie.actions';
+import {CreateMovie, LoadMovies, UpdateMovie} from '../store/actions/movie.actions';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {MovieOverviewModalComponent} from '../movie-overview-modal/movie-overview-modal.component';
 import {MovieAddUpdateModalComponent} from '../movie-add-update-modal/movie-add-update-modal.component';
@@ -39,15 +39,15 @@ export class MoviesListComponent implements OnInit {
     const overviewRef = this.dialogService.open(MovieOverviewModalComponent, {
       data: movie
     });
-    overviewRef.onClose.subscribe(updateMovie => {
-      if (updateMovie) {
-        this.dialogService.open(MovieAddUpdateModalComponent, {
-          data: {
-            movie: updateMovie,
-            mode: ModalMode.Update
-          },
-          contentStyle: {
-            overflow: 'visible'
+    overviewRef.onClose.subscribe(movieToUpdate => {
+      if (movieToUpdate) {
+        const addUpdateRef = this.openCreateUpdateDialog(movie, ModalMode.Update);
+
+        addUpdateRef.onClose.subscribe(updatedMovie => {
+          if (updatedMovie) {
+            const {title, overview, release_date} = updatedMovie;
+            const updated = {...movie, title, overview, release_date};
+            this.store.dispatch(new UpdateMovie(updated));
           }
         });
       }
@@ -58,7 +58,6 @@ export class MoviesListComponent implements OnInit {
   onCreate(movie: Movie): void {
     const ref = this.openCreateUpdateDialog(movie, ModalMode.Create);
     ref.onClose.subscribe(createdMovie => {
-      console.log(createdMovie);
       const obj: Movie = {
         id: null,
         title: createdMovie.title,

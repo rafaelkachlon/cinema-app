@@ -52,11 +52,41 @@ export class CreateMovieSuccess implements Action {
   }
 }
 
+// Update Movie actions
+export const UPDATE_MOVIE = '[Movies] Update Movie';
+export const UPDATE_MOVIE_FAIL = '[Movies] Update Movie Fail';
+export const UPDATE_MOVIE_SUCCESS = '[Movies] Update Movie Success';
+
+export class UpdateMovie implements Action {
+  readonly type = UPDATE_MOVIE;
+
+  constructor(public payload: Movie) {
+  }
+}
+
+
+export class UpdateMovieFail implements Action {
+  readonly type = UPDATE_MOVIE_FAIL;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class UpdateMovieSuccess implements Action {
+  readonly type = UPDATE_MOVIE_SUCCESS;
+
+  constructor(public payload: Movie) {
+  }
+}
+
 export type MoviesAction =
   LoadMovies
   | LoadMoviesFail
   | LoadMoviesSuccess
   | CreateMovie
   | CreateMovieFail
-  | CreateMovieSuccess;
+  | CreateMovieSuccess
+  | UpdateMovie
+  | UpdateMovieSuccess
+  | UpdateMovieFail;
 

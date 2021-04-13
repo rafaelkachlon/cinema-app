@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Movie} from '../models/movie.model';
 
 @Component({
@@ -7,18 +7,13 @@ import {Movie} from '../models/movie.model';
   styleUrls: ['./movie-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieItemComponent implements OnInit {
+export class MovieItemComponent {
 
   @Input()
   movie: Movie;
 
   @Output() openModal = new EventEmitter<any>();
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   readMore(): void {
     this.openModal.emit(this.movie);

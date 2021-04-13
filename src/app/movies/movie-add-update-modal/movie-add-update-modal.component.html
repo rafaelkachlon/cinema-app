@@ -5,20 +5,20 @@
          placeholder="Enter movie title..."
          formControlName="title">
   <div class="error" *ngIf="required('title')">Title is required.</div>
-  <label for="description">Description</label>
+  <label for="description">Overview</label>
   <input type="text" id="description"
-         placeholder="Enter movie description..."
-         formControlName="description">
-  <div class="error" *ngIf="required('description')">Description is required.</div>
+         placeholder="Enter movie overview..."
+         formControlName="overview">
+  <div class="error" *ngIf="required('overview')">Overview is required.</div>
 
-  <label for="publishDate">Publish date</label>
+  <label for="publishDate">Release date</label>
 
-  <p-calendar inputId="publishDate" formControlName="publishDate"
+  <p-calendar inputId="publishDate" formControlName="release_date"
               [yearNavigator]="true" [monthNavigator]="true"
               [readonlyInput]="true" yearRange="1900:2021">
   </p-calendar>
-  <div class="error" *ngIf="required('publishDate')">Publish date is required.</div>
-  <div class="error" *ngIf="invalid">Publish date is invalid.</div>
+  <div class="error" *ngIf="required('release_date')">Publish date is required.</div>
+  <div class="error" *ngIf="invalid">Release date is invalid.</div>
 
   <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>

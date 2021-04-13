@@ -29,8 +29,8 @@ export class MovieAddUpdateModalComponent implements OnInit {
 
     this.form = this.fb.group({
       title: [this.isNewMovie ? '' : this.movie.title, Validators.required],
-      description: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
-      publishDate: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.CheckDate]]
+      overview: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
+      release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.CheckDate]]
     });
 
   }
@@ -48,8 +48,8 @@ export class MovieAddUpdateModalComponent implements OnInit {
   }
 
   get invalid(): boolean {
-    return (this.form.get('publishDate').hasError('invalidDate')
-      && this.form.get('publishDate').touched && !this.form.get('publishDate').hasError('required'));
+    return (this.form.get('release_date').hasError('invalidDate')
+      && this.form.get('release_date').touched && !this.form.get('release_date').hasError('required'));
   }
 
   submit(): void {

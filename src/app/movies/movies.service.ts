@@ -43,7 +43,8 @@ export class MoviesService {
     const add = {
       ...movie,
       poster_path: 'http://placeimg.com/185/285/Animals',
-      vote_average: 5
+      vote_average: 5,
+      id: Math.floor(Math.random() * 10)
     };
 
     return of(add).pipe(

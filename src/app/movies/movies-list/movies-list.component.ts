@@ -62,11 +62,12 @@ export class MoviesListComponent implements OnInit {
         const obj: Movie = {
           id: null,
           title: createdMovie.title,
-          overview: createdMovie.description,
+          overview: createdMovie.overview,
           poster_path: null,
-          release_date: createdMovie.publishDate,
+          release_date: createdMovie.release_date,
           vote_average: null
         };
+        console.log(obj);
         this.store.dispatch(new CreateMovie(obj));
       }
     });

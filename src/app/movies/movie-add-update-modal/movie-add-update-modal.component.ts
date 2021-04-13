@@ -31,10 +31,16 @@ export class MovieAddUpdateModalComponent implements OnInit {
     this.isNewMovie = mode === ModalMode.Create;
 
     this.form = this.fb.group({
-      title: [this.isNewMovie ? '' : this.movie.title, [Validators.required], [this.validators.CheckIfTitleExists.bind(this.validators)]],
+      title: [
+        this.isNewMovie ? '' : this.movie.title,
+        [Validators.required]
+      ],
       overview: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
       release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.validators.CheckDate]]
     });
+    if (this.isNewMovie) {
+      this.form.get('title').setAsyncValidators(this.validators.CheckIfTitleExists.bind(this.validators));
+    }
 
   }
 

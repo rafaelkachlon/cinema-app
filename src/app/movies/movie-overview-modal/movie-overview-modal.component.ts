@@ -18,10 +18,13 @@ export class MovieOverviewModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedMovie = this.config.data;
-    console.log('selected movie from overview modal', this.selectedMovie);
   }
 
   editMovie(): void {
     this.ref.close(this.selectedMovie);
+  }
+
+  removeMovie(): void {
+    this.ref.close();
   }
 }

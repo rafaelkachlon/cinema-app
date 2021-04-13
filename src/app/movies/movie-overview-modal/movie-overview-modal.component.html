@@ -3,11 +3,12 @@
     <img [src]="selectedMovie?.poster_path" [alt]="selectedMovie?.title + 'poster'">
   </div>
   <div class="text-container">
-    <div class="movie-title">{{selectedMovie?.title}}</div>
+    <div class="movie-title">{{selectedMovie?.title | uppercaseword | englishonly}}</div>
     <div class="movie-overview">
       {{selectedMovie?.overview}}
     </div>
     <div class="release-date">Release date: {{selectedMovie?.release_date | date:'dd/MM/YYYY'}}</div>
   </div>
-  <button (click)="editMovie()">EDIT</button>
+  <button (click)="editMovie()">Edit</button>
+  <button (click)="removeMovie()">Remove</button>
 </div>

@@ -58,15 +58,17 @@ export class MoviesListComponent implements OnInit {
   onCreate(movie: Movie): void {
     const ref = this.openCreateUpdateDialog(movie, ModalMode.Create);
     ref.onClose.subscribe(createdMovie => {
-      const obj: Movie = {
-        id: null,
-        title: createdMovie.title,
-        overview: createdMovie.description,
-        poster_path: null,
-        release_date: createdMovie.publishDate,
-        vote_average: null
-      };
-      this.store.dispatch(new CreateMovie(obj));
+      if (createdMovie) {
+        const obj: Movie = {
+          id: null,
+          title: createdMovie.title,
+          overview: createdMovie.description,
+          poster_path: null,
+          release_date: createdMovie.publishDate,
+          vote_average: null
+        };
+        this.store.dispatch(new CreateMovie(obj));
+      }
     });
   }
 
@@ -80,10 +82,5 @@ export class MoviesListComponent implements OnInit {
         overflow: 'visible'
       }
     });
-  }
-
-  onAddUpdateSubmitted(event): void {
-    console.log('event from movie list', event);
-
   }
 }

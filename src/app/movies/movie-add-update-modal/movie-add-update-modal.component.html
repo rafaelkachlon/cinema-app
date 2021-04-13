@@ -5,6 +5,7 @@
          placeholder="Enter movie title..."
          formControlName="title">
   <div class="error" *ngIf="required('title')">Title is required.</div>
+  <div class="error" *ngIf="titleExists">Title is already exists.</div>
   <label for="description">Overview</label>
   <input type="text" id="description"
          placeholder="Enter movie overview..."

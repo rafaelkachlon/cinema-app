@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Movie} from '../models/movie.model';
 import {ModalMode} from '../models/modal-mode.enum';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {ValidatorsService} from '../validators/validators.service';
 
 @Component({
   selector: 'app-movie-add-update-modal',
@@ -17,8 +18,10 @@ export class MovieAddUpdateModalComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private ref: DynamicDialogRef,
-              private config: DynamicDialogConfig) {
+              private config: DynamicDialogConfig,
+              private validators: ValidatorsService) {
   }
+
   form: FormGroup;
   isNewMovie: boolean;
 
@@ -28,9 +31,9 @@ export class MovieAddUpdateModalComponent implements OnInit {
     this.isNewMovie = mode === ModalMode.Create;
 
     this.form = this.fb.group({
-      title: [this.isNewMovie ? '' : this.movie.title, Validators.required],
+      title: [this.isNewMovie ? '' : this.movie.title, [Validators.required], [this.validators.CheckIfTitleExists.bind(this.validators)]],
       overview: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
-      release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.CheckDate]]
+      release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.validators.CheckDate]]
     });
 
   }
@@ -39,12 +42,12 @@ export class MovieAddUpdateModalComponent implements OnInit {
     return this.isNewMovie ? 'Add new movie' : `Edit ${this.movie.title}`;
   }
 
-  CheckDate(control: AbstractControl): any {
-    return isNaN(Date.parse(control.value.toString())) ? {invalidDate: true} : null;
-  }
-
   required(fieldName: string): boolean {
     return this.form.get(fieldName).hasError('required') && this.form.get(fieldName).touched;
+  }
+
+  get titleExists(): boolean {
+    return this.form.get('title').hasError('titleExists') && this.form.get('title').dirty;
   }
 
   get invalid(): boolean {

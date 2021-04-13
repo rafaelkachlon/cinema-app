@@ -41,8 +41,20 @@ export function movieReducer(state = initialState, action: movieActions.MoviesAc
       }
       const index = state.movies.indexOf(existingMovie);
       movies[index] = updatedMovie;
-      console.log('index', existingMovie);
       return {...state, movies};
+    }
+
+    case movieActions.REMOVE_MOVIE_SUCCESS: {
+      const movie = action.payload;
+      const existingMovie = state.movies.some(m => m.id === movie.id);
+      if (!existingMovie) {
+        return state;
+      }
+
+      return {
+        ...state,
+        movies: state.movies.filter(m => m.id !== movie.id)
+      };
     }
   }
   return state;

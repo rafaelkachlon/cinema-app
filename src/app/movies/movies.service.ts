@@ -56,4 +56,10 @@ export class MoviesService {
       delay(500)
     );
   }
+
+  removeMovie(movie: Movie): Observable<Movie> {
+    return of(movie).pipe(
+      delay(500)
+    );
+  }
 }

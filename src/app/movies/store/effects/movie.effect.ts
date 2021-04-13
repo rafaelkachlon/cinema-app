@@ -7,7 +7,15 @@ import {
   CreateMovieSuccess,
   LOAD_MOVIES,
   LoadMoviesFail,
-  LoadMoviesSuccess, UPDATE_MOVIE, UpdateMovie, UpdateMovieFail, UpdateMovieSuccess
+  LoadMoviesSuccess,
+  REMOVE_MOVIE,
+  RemoveMovie,
+  RemoveMovieFail,
+  RemoveMovieSuccess,
+  UPDATE_MOVIE,
+  UpdateMovie,
+  UpdateMovieFail,
+  UpdateMovieSuccess
 } from '../actions/movie.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {MoviesService} from '../../movies.service';
@@ -55,6 +63,20 @@ export class MovieEffects {
           .pipe(
             map(updatedMovie => new UpdateMovieSuccess(updatedMovie)),
             catchError(error => of(new UpdateMovieFail(error)))
+          );
+      })
+    );
+  });
+
+  removeMovie$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(REMOVE_MOVIE),
+      map((action: RemoveMovie) => action.payload),
+      switchMap(movie => {
+        return this.moviesService.removeMovie(movie)
+          .pipe(
+            map(removedMovie => new RemoveMovieSuccess(removedMovie)),
+            catchError(error => of(new RemoveMovieFail(error)))
           );
       })
     );

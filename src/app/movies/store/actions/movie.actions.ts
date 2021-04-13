@@ -79,6 +79,34 @@ export class UpdateMovieSuccess implements Action {
   }
 }
 
+// Remove Movie actions
+export const REMOVE_MOVIE = '[Movies] Remove Movie';
+export const REMOVE_MOVIE_FAIL = '[Movies] Remove Movie Fail';
+export const REMOVE_MOVIE_SUCCESS = '[Movies] Remove Movie Success';
+
+export class RemoveMovie implements Action {
+  readonly type = REMOVE_MOVIE;
+
+  constructor(public payload: Movie) {
+  }
+}
+
+
+export class RemoveMovieFail implements Action {
+  readonly type = REMOVE_MOVIE_FAIL;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class RemoveMovieSuccess implements Action {
+  readonly type = REMOVE_MOVIE_SUCCESS;
+
+  constructor(public payload: Movie) {
+  }
+}
+
+
 export type MoviesAction =
   LoadMovies
   | LoadMoviesFail
@@ -88,5 +116,8 @@ export type MoviesAction =
   | CreateMovieSuccess
   | UpdateMovie
   | UpdateMovieSuccess
-  | UpdateMovieFail;
+  | UpdateMovieFail
+  | RemoveMovie
+  | RemoveMovieSuccess
+  | RemoveMovieFail;
 

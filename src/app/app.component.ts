@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MoviesListComponent} from './movies/movies-list/movies-list.component';
 
 @Component({
@@ -6,18 +6,15 @@ import {MoviesListComponent} from './movies/movies-list/movies-list.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'cinemaApp';
   show: boolean;
 
   @ViewChild(MoviesListComponent) movies: MoviesListComponent;
 
-  ngAfterViewInit(): void {
-    console.log('movies component: ', this.movies);
-  }
 
   openModal(): void {
-    this.movies.onAdd(null);
+    this.movies.onCreate(null);
   }
 }
 

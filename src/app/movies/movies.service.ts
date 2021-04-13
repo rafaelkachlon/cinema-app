@@ -40,6 +40,18 @@ export class MoviesService {
   }
 
   createMovie(movie: Movie): Observable<Movie> {
+    const add = {
+      ...movie,
+      poster_path: 'http://placeimg.com/185/285/Animals',
+      vote_average: 5
+    };
+
+    return of(add).pipe(
+      delay(500)
+    );
+  }
+
+  updateMovie(movie: Movie): Observable<Movie> {
     return of(movie).pipe(
       delay(500)
     );

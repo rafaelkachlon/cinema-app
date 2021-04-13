@@ -1,7 +1,7 @@
-<h2>Add new movie</h2>
+<h2>{{title}}</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
   <label for="title">Title</label>
-  <input type="text" id="title" #title
+  <input type="text" id="title"
          placeholder="Enter movie title..."
          formControlName="title">
   <div class="error" *ngIf="required('title')">Title is required.</div>

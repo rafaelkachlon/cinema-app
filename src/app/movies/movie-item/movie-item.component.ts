@@ -23,8 +23,4 @@ export class MovieItemComponent implements OnInit {
   readMore(): void {
     this.openModal.emit(this.movie);
   }
-  get changeDetected(): string {
-    console.log('movie-item detected');
-    return 'chang';
-  }
 }

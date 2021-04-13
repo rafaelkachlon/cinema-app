@@ -6,9 +6,10 @@ import {Store} from '@ngrx/store';
 import {MovieState} from '../store/reducers/movie.reducer';
 import * as fromSelectors from '../store/selectors/movie.selector';
 import {CreateMovie, LoadMovies} from '../store/actions/movie.actions';
-import {DialogService} from 'primeng/dynamicdialog';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {MovieOverviewModalComponent} from '../movie-overview-modal/movie-overview-modal.component';
 import {MovieAddUpdateModalComponent} from '../movie-add-update-modal/movie-add-update-modal.component';
+import {ModalMode} from '../models/modal-mode.enum';
 
 @Component({
   selector: 'app-movies-list',
@@ -35,26 +36,51 @@ export class MoviesListComponent implements OnInit {
   }
 
   onOpenModal(movie: Movie): void {
-    this.dialogService.open(MovieOverviewModalComponent, {
+    const overviewRef = this.dialogService.open(MovieOverviewModalComponent, {
       data: movie
     });
-
-    // test on create when selecting a movie
-    if (!!movie) {
-      this.onCreate(movie);
-    }
-  }
-
-  onAdd(movie: Movie): void {
-    this.dialogService.open(MovieAddUpdateModalComponent, {
-      data: {
-        movie
+    overviewRef.onClose.subscribe(updateMovie => {
+      if (updateMovie) {
+        this.dialogService.open(MovieAddUpdateModalComponent, {
+          data: {
+            movie: updateMovie,
+            mode: ModalMode.Update
+          },
+          contentStyle: {
+            overflow: 'visible'
+          }
+        });
       }
     });
   }
 
+
   onCreate(movie: Movie): void {
-    this.store.dispatch(new CreateMovie(movie));
+    const ref = this.openCreateUpdateDialog(movie, ModalMode.Create);
+    ref.onClose.subscribe(createdMovie => {
+      console.log(createdMovie);
+      const obj: Movie = {
+        id: null,
+        title: createdMovie.title,
+        overview: createdMovie.description,
+        poster_path: null,
+        release_date: createdMovie.publishDate,
+        vote_average: null
+      };
+      this.store.dispatch(new CreateMovie(obj));
+    });
+  }
+
+  openCreateUpdateDialog(movie: Movie, mode: ModalMode): DynamicDialogRef {
+    return this.dialogService.open(MovieAddUpdateModalComponent, {
+      data: {
+        movie,
+        mode
+      },
+      contentStyle: {
+        overflow: 'visible'
+      }
+    });
   }
 
   onAddUpdateSubmitted(event): void {

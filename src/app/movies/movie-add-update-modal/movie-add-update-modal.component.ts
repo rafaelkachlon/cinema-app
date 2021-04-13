@@ -1,7 +1,9 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {Movie} from '../models/movie.model';
+import {ModalMode} from '../models/modal-mode.enum';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-movie-add-update-modal',
@@ -14,19 +16,27 @@ export class MovieAddUpdateModalComponent implements OnInit {
   movie: Movie;
 
   constructor(private fb: FormBuilder,
+              private ref: DynamicDialogRef,
               private config: DynamicDialogConfig) {
   }
-
-  @Output() submitted = new EventEmitter();
   form: FormGroup;
+  isNewMovie: boolean;
 
   ngOnInit(): void {
     this.movie = this.config.data.movie;
+    const mode = this.config.data.mode as ModalMode;
+    this.isNewMovie = mode === ModalMode.Create;
+
     this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      publishDate: ['', [Validators.required, this.CheckDate]]
+      title: [this.isNewMovie ? '' : this.movie.title, Validators.required],
+      description: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
+      publishDate: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.CheckDate]]
     });
+
+  }
+
+  get title(): string {
+    return this.isNewMovie ? 'Add new movie' : `Edit ${this.movie.title}`;
   }
 
   CheckDate(control: AbstractControl): any {
@@ -43,6 +53,6 @@ export class MovieAddUpdateModalComponent implements OnInit {
   }
 
   submit(): void {
-    this.submitted.emit(this.form.value);
+    this.ref.close(this.form.value);
   }
 }

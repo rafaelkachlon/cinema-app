@@ -18,7 +18,10 @@
       {{selectedMovie?.overview}}
     </div>
     <div class="release-date">Release date: {{selectedMovie?.release_date | date:'dd/MM/YYYY'}}</div>
-
+    <div class="runtime">Runtime: {{selectedMovie?.runtime}} min</div>
+    <div class="genres">
+      <div class="genre" *ngFor="let genre of selectedMovie.genres">{{genre.name}}</div>
+    </div>
   </div>
 </div>
 

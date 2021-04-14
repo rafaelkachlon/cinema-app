@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {Movie, MovieResponse, MoviesResponse} from './models/movie.model';
-import {catchError, delay, map} from 'rxjs/operators';
+import {forkJoin, Observable, of} from 'rxjs';
+import {Genre, Movie, MovieResponse, MoviesResponse} from './models/movie.model';
+import {delay, map, switchMap} from 'rxjs/operators';
+import {MovieDetailsResponse} from './models/movie-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,31 +12,55 @@ export class MoviesService {
   private readonly key = '9ee82a95315c563b8d277066f4ee9201';
   private readonly baseUrl = 'https://api.themoviedb.org/3/';
   private readonly discoverUrl = 'discover/movie?language=en-US&sort_by=vote_count.desc&include_adult=true&include_video=false&page=1&api_key=';
-  // private readonly movieDetailsUrl = 'movie/';
+  private readonly genresUrl = 'genre/movie/list?api_key=';
+  private readonly movieDetailsUrl = 'movie/';
   private readonly imageUrl = 'https://image.tmdb.org/t/p/w185/';
-
-  // {movie_id}?api_key=<<api_key>>&language=en-US';
+  private genres: Genre[];
 
   constructor(private http: HttpClient) {
+    this.getGenres().subscribe(res => this.genres = res);
+  }
+
+  get Genres(): Genre[] {
+    return this.genres;
+  }
+
+  getGenres(): Observable<Genre[]> {
+    return this.http.get(`${this.baseUrl}${this.genresUrl}${this.key}`)
+      .pipe(
+        map((response: Genre[]) => response)
+      );
+
+  }
+
+  getMovieDetails(movieId: number): Observable<Movie> {
+    return this.http.get(`${this.baseUrl}${this.movieDetailsUrl}${movieId}?api_key=${this.key}`)
+      .pipe(
+        map((response: MovieDetailsResponse) => {
+          const {id, genres, runtime, title, poster_path, vote_average, overview, release_date} = response;
+          return {
+            id,
+            genres,
+            runtime,
+            title,
+            overview,
+            vote_average,
+            release_date: new Date(release_date),
+            poster_path: `${this.imageUrl}${poster_path}`
+          } as Movie;
+        })
+      );
   }
 
   getMovies(): Observable<Movie[]> {
     return this.http.get(`${this.baseUrl}${this.discoverUrl}${this.key}`)
       .pipe(
         map((response: MoviesResponse) => response.results),
-        map((movies: MovieResponse[]) => {
-          return movies.map(movie => {
-            return {
-              id: movie.id,
-              title: movie.title,
-              overview: movie.overview,
-              poster_path: `${this.imageUrl}${movie.poster_path}`,
-              release_date: new Date(movie.release_date),
-              vote_average: movie.vote_average
-            } as Movie;
-          });
+        switchMap((response: MovieResponse[]) => {
+          const obj = response.map(movie => this.getMovieDetails(movie.id));
+          return forkJoin(obj);
         }),
-        catchError(error => of(error.json()))
+        map((movies: Movie[]) => movies)
       );
   }
 

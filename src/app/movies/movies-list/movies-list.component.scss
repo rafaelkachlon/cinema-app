@@ -51,8 +51,25 @@
         font-size: 24px;
       }
 
-      .movie-overview {
+      .movie-overview, .release-date {
         margin-bottom: 10px;
+      }
+
+
+      .genres {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .genre {
+        border: 1px solid;
+        padding: 5px;
+        border-radius: 5px;
+        margin: 0 10px 10px 0;
+        background: white;
+        color: #020d18;
       }
     }
 

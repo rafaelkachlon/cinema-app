@@ -29,4 +29,11 @@ export interface Movie {
   release_date: Date;
   vote_average: number;
   overview: string;
+  runtime?: number;
+  genres?: Genre[];
+}
+
+export interface Genre {
+  id: number;
+  name: string;
 }

@@ -5,6 +5,11 @@
     (openModal)="onOpenModal($event)"></app-movie-item>
 </div>
 <ng-template #noMovies>
-  <div class="no-movies">Failed to get movies or there aren't any movies yet.</div>
+  <div class="no-movies">There aren't any movies yet. You can
+    <span class="click-here" (click)="onCreate(null)">click here</span>
+    to add one now.
+  </div>
 </ng-template>
+
+<p-toast position="bottom-right"></p-toast>
 

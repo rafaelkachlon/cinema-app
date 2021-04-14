@@ -7,6 +7,14 @@
   color: white;
   font-size: 22px;
   margin-top: 40px;
+
+  .click-here {
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .p-dialog {

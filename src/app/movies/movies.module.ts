@@ -13,6 +13,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {ButtonModule} from 'primeng/button';
     CalendarModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule
   ]
 })
 export class MoviesModule {

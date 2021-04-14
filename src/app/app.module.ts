@@ -11,6 +11,7 @@ import {environment} from '../environments/environment';
 import {movieReducer} from './movies/store/reducers/movie.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {MovieEffects} from './movies/store/effects/movie.effect';
+import {MessageService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {MovieEffects} from './movies/store/effects/movie.effect';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([MovieEffects])
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

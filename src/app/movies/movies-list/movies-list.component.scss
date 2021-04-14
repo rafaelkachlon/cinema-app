@@ -59,11 +59,13 @@
     .buttons {
       display: flex;
       justify-content: center;
+      margin-top: 10px;
 
       button {
         padding: 10px;
         border-radius: 5px;
         color: white;
+        margin: 0 10px;
 
         &.update {
           background: blue;

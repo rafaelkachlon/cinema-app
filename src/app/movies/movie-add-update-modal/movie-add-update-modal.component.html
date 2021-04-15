@@ -21,5 +21,16 @@
   <div class="error" *ngIf="required('release_date')">Publish date is required.</div>
   <div class="error" *ngIf="invalid">Release date is invalid.</div>
 
+  <label for="runtime">Runtime</label>
+  <input type="number" id="runtime" class="p-inputtext p-component"
+         placeholder="Enter movie runtime..."
+         formControlName="runtime">
+  <div class="error" *ngIf="required('runtime')">Runtime is required.</div>
+
+  <label for="genres">Genres</label>
+  <p-multiSelect [options]="genres" defaultLabel="Select a genre" optionLabel="name" inputId="genres"
+                  formControlName="genres"></p-multiSelect>
+  <div class="error" *ngIf="required('genres')">Genre is required.</div>
+
   <button class="submit-btn" pButton label="Save" type="submit" [disabled]="form.invalid"></button>
 </form>

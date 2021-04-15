@@ -14,6 +14,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ToastModule} from 'primeng/toast';
     DynamicDialogModule,
     ConfirmDialogModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    MultiSelectModule
   ]
 })
 export class MoviesModule {

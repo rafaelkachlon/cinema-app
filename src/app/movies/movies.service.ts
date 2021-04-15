@@ -9,7 +9,7 @@ import {MovieDetailsResponse} from './models/movie-details.model';
   providedIn: 'root'
 })
 export class MoviesService {
-  private readonly key = '9ee82a95315c563b8d277066f4ee9201';
+  private readonly key = 'b0b9386f19423835e626883809caf68a';
   private readonly baseUrl = 'https://api.themoviedb.org/3/';
   private readonly discoverUrl = 'discover/movie?language=en-US&sort_by=vote_count.desc&include_adult=true&include_video=false&page=1&api_key=';
   private readonly genresUrl = 'genre/movie/list?api_key=';
@@ -28,7 +28,7 @@ export class MoviesService {
   getGenres(): Observable<Genre[]> {
     return this.http.get(`${this.baseUrl}${this.genresUrl}${this.key}`)
       .pipe(
-        map((response: Genre[]) => response)
+        map((response: any) => response.genres)
       );
 
   }

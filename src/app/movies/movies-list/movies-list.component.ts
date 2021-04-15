@@ -45,8 +45,8 @@ export class MoviesListComponent implements OnInit {
 
         addUpdateRef.onClose.subscribe(updatedMovie => {
           if (updatedMovie) {
-            const {title, overview, release_date} = updatedMovie;
-            const updated = {...movie, title, overview, release_date};
+            const {title, overview, release_date, genres, runtime} = updatedMovie;
+            const updated = {...movie, title, overview, release_date, genres, runtime};
             this.store.dispatch(new UpdateMovie(updated));
           }
         });
@@ -65,9 +65,10 @@ export class MoviesListComponent implements OnInit {
           overview: createdMovie.overview,
           poster_path: null,
           release_date: createdMovie.release_date,
-          vote_average: null
+          vote_average: null,
+          runtime: createdMovie.runtime,
+          genres: createdMovie.genres
         };
-        console.log(obj);
         this.store.dispatch(new CreateMovie(obj));
       }
     });

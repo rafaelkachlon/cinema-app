@@ -34,7 +34,6 @@ export class MovieOverviewModalComponent implements OnInit {
     this.confirmation.confirm({
       message: `Are you sure that you want to remove "${this.selectedMovie.title}"?`,
       accept: () => {
-        // dispatch a remove action
         this.store.dispatch(new RemoveMovie(this.selectedMovie));
         this.ref.close();
       }

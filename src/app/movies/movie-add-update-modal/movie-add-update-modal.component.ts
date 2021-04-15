@@ -5,6 +5,8 @@ import {ModalMode} from '../models/modal-mode.enum';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {ValidatorsService} from '../validators/validators.service';
+import {Genre} from '../models/movie-details.model';
+import {MoviesService} from '../movies.service';
 
 @Component({
   selector: 'app-movie-add-update-modal',
@@ -15,17 +17,20 @@ import {ValidatorsService} from '../validators/validators.service';
 export class MovieAddUpdateModalComponent implements OnInit {
 
   movie: Movie;
+  genres: Genre[];
 
   constructor(private fb: FormBuilder,
               private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
-              private validators: ValidatorsService) {
+              private validators: ValidatorsService,
+              private movieService: MoviesService) {
   }
 
   form: FormGroup;
   isNewMovie: boolean;
 
   ngOnInit(): void {
+    this.genres = this.movieService.Genres;
     this.movie = this.config.data.movie;
     const mode = this.config.data.mode as ModalMode;
     this.isNewMovie = mode === ModalMode.Create;
@@ -36,7 +41,9 @@ export class MovieAddUpdateModalComponent implements OnInit {
         [Validators.required]
       ],
       overview: [this.isNewMovie ? '' : this.movie.overview, Validators.required],
-      release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.validators.CheckDate]]
+      release_date: [this.isNewMovie ? '' : this.movie.release_date, [Validators.required, this.validators.CheckDate]],
+      runtime: [this.isNewMovie ? '' : this.movie.runtime, [Validators.required, Validators.minLength(0)]],
+      genres: [this.isNewMovie ? [] : this.movie.genres, [Validators.required]]
     });
     if (this.isNewMovie) {
       this.form.get('title').setAsyncValidators(this.validators.CheckIfTitleExists.bind(this.validators));
